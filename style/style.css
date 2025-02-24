@@ -4,20 +4,23 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    position: relative;
+    min-height: 100vh;
+}
+
+.div-title {
+    max-width: 60%;
 }
 
 .titulo-img {
-    position: absolute; /* Posiciona la imagen sobre todos los demás elementos */
-    top: 8%; /* Mueve la imagen al centro vertical */
-    left: 50%; /* Mueve la imagen al centro horizontal */
-    transform: translate(-50%, -50%); /* Centra perfectamente la imagen */
-    z-index: 1000; /* Asegura que esté encima de los demás elementos */
-    max-width: 80%; /* Opcional: Ajusta el tamaño máximo de la imagen */
-    height: auto; /* Mantiene la proporción de la imagen */
+    text-align: center; /* Centra el texto horizontalmente */
+    margin: 4rem 0 2rem 0; /* Agrega espacio superior */
+    font-size: 2rem; /* Tamaño del título */
+    font-weight: bold;
+    max-width: 60%;
+    color: #333; /* Color del texto */
 }
 
 .recipient-gallery {
@@ -98,8 +101,8 @@ button:disabled {
 }
 
 .help-icon {
-    width: 90px;
-    height: 70px;
+    width: 4rem;
+    height: 3rem;
 }
 
 
@@ -149,15 +152,15 @@ textarea:focus {
 
 .controls, .recipient-controls, .background-options {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 2rem;
     margin-bottom: 20px;
 }
 
 .controlsanadir{
     gap: 40px;
     margin-bottom: 40px;
-	position: absolute;
 	top: 8px;
 	left: 16px;
 }
@@ -233,6 +236,12 @@ textarea:focus {
 .parent {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 768px) {
+    .parent {
+        grid-template-columns: 1fr;
+    }
 }
 
 .carta, .estilos {
@@ -368,4 +377,40 @@ input.error {
 /* Estilo para el mensaje de error */
 input.error::placeholder {
     color: red;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 90%;
+    max-width: 1200px;
+    justify-content: center; /* Centra las secciones */
+}
+
+/* Cada sección */
+.box {
+    flex: 1;
+    min-width: 250px; /* Tamaño mínimo para que sea responsivo */
+    max-width: 350px; /* Tamaño máximo por sección */
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Media Query para pantallas grandes (3 en fila) */
+@media (min-width: 769px) {
+    .container {
+        flex-direction: row;
+    }
+}
+
+/* Media Query para pantallas pequeñas (se apilan en columna) */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
 }
