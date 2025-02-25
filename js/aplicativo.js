@@ -51,10 +51,10 @@ if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
 		image.addEventListener('click', () => {
 			const recipientName = image.getAttribute('data-recipient');
 			const recipientEmailInput = document.getElementById('correo'); // Obtener el campo de correo
-	
+
 			if (recipientName) {
 				recipientInput.value = recipientName;
-	
+
 				// Asignar correo basado en el nombre
 				if (recipientName === "Papá") {
 					recipientEmailInput.value = "papa@example.com";
@@ -63,14 +63,14 @@ if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
 				} else {
 					recipientEmailInput.value = ""; // Limpiar si no se encuentra
 				}
-	
+
 				speakText(`Has seleccionado a ${recipientName} como destinatario.`);
 			} else {
 				speakText("No se pudo identificar al destinatario.");
 			}
 		});
 	});
-	
+
 
 	//Hablar tipografia y color
 	fontBoxes.forEach((box) => {
@@ -413,57 +413,57 @@ if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
 
 
 // Función para validar el nombre
-	function validarNombre() {
-		const nombre = document.getElementById("new-name");
-		const regexn = /\d/; // Expresión regular para detectar números
+function validarNombre() {
+	const nombre = document.getElementById("new-name");
+	const regexn = /\d/; // Expresión regular para detectar números
 
-		// Verifica si el nombre está vacío o contiene números
-		if (nombre.value === "") {
-			nombre.classList.add("error");
-			alert("El nombre no puede estar vacío");
-			return false;
-		}
-		if (regexn.test(nombre.value)) {
-			nombre.classList.add("error");
-			alert("El nombre no debe contener números");
-			nombre.value = ""; // Borra el campo si contiene números
-			return false;
-		}
-
-		nombre.classList.remove("error"); // Elimina la clase 'error' si la validación es exitosa
-		return true;
+	// Verifica si el nombre está vacío o contiene números
+	if (nombre.value === "") {
+		nombre.classList.add("error");
+		alert("El nombre no puede estar vacío");
+		return false;
+	}
+	if (regexn.test(nombre.value)) {
+		nombre.classList.add("error");
+		alert("El nombre no debe contener números");
+		nombre.value = ""; // Borra el campo si contiene números
+		return false;
 	}
 
-	// Función para validar el correo
-	function validarCorreo() {
-		const correo = document.getElementById("new-email");
-		const regexCorreo = /\S+@\S+\.\S+/; // Expresión regular para validar el correo
+	nombre.classList.remove("error"); // Elimina la clase 'error' si la validación es exitosa
+	return true;
+}
 
-		// Verifica si el correo está vacío o no contiene '@'
-		if (correo.value === "") {
-			correo.classList.add("error");
-			alert("El correo no puede estar vacío");
-			return false;
-		}
-		if (!regexCorreo.test(correo.value)) {
-			correo.classList.add("error");
-			alert("Por favor, ingresa un correo electrónico válido");
-			correo.value = ""; // Borra el campo si no es válido
-			return false;
-		}
+// Función para validar el correo
+function validarCorreo() {
+	const correo = document.getElementById("new-email");
+	const regexCorreo = /\S+@\S+\.\S+/; // Expresión regular para validar el correo
 
-		correo.classList.remove("error"); // Elimina la clase 'error' si la validación es exitosa
-		return true;
+	// Verifica si el correo está vacío o no contiene '@'
+	if (correo.value === "") {
+		correo.classList.add("error");
+		alert("El correo no puede estar vacío");
+		return false;
+	}
+	if (!regexCorreo.test(correo.value)) {
+		correo.classList.add("error");
+		alert("Por favor, ingresa un correo electrónico válido");
+		correo.value = ""; // Borra el campo si no es válido
+		return false;
 	}
 
-	// Función para validar el formulario de destinatario
-	function validarFormularioDestinatario() {
-		if (!validarNombre() || !validarCorreo()) {
-			return false;
-		}
-		alert("Destinatario validado correctamente");
-		return true;
+	correo.classList.remove("error"); // Elimina la clase 'error' si la validación es exitosa
+	return true;
+}
+
+// Función para validar el formulario de destinatario
+function validarFormularioDestinatario() {
+	if (!validarNombre() || !validarCorreo()) {
+		return false;
 	}
+	alert("Destinatario validado correctamente");
+	return true;
+}
 
 // Agregar esta llamada cuando añadas un nuevo destinatario
 document.getElementById("save-recipient-btn").addEventListener("click", function () {
@@ -518,33 +518,33 @@ document.getElementById("save-recipient-btn").addEventListener("click", function
 
 // Función para cargar destinatarios al cargar la página
 function cargarDestinatarios() {
-    const destinatarios = JSON.parse(localStorage.getItem('destinatarios')) || [];
-    destinatarios.forEach(destinatario => {
-        // Lógica para agregar destinatarios a la galería
-        const recipientContainer = document.createElement('div');
-        recipientContainer.classList.add('recipient-container');
+	const destinatarios = JSON.parse(localStorage.getItem('destinatarios')) || [];
+	destinatarios.forEach(destinatario => {
+		// Lógica para agregar destinatarios a la galería
+		const recipientContainer = document.createElement('div');
+		recipientContainer.classList.add('recipient-container');
 
-        const newImage = document.createElement('img');
-        newImage.src = destinatario.pic;
-        newImage.alt = destinatario.name;
-        newImage.setAttribute('data-recipient', destinatario.name);
-        newImage.classList.add('small-image');
+		const newImage = document.createElement('img');
+		newImage.src = destinatario.pic;
+		newImage.alt = destinatario.name;
+		newImage.setAttribute('data-recipient', destinatario.name);
+		newImage.classList.add('small-image');
 
-        const recipientName = document.createElement('span');
-        recipientName.textContent = destinatario.name;
-        recipientName.classList.add('recipient-name');
+		const recipientName = document.createElement('span');
+		recipientName.textContent = destinatario.name;
+		recipientName.classList.add('recipient-name');
 
-        recipientContainer.appendChild(newImage);
-        recipientContainer.appendChild(recipientName);
+		recipientContainer.appendChild(newImage);
+		recipientContainer.appendChild(recipientName);
 
-        document.querySelector('.recipient-gallery').appendChild(recipientContainer);
+		document.querySelector('.recipient-gallery').appendChild(recipientContainer);
 
-        newImage.addEventListener('click', () => {
-            document.getElementById('recipient').value = destinatario.name;
-            document.getElementById('correo').value = destinatario.email; // Asignar el correo
-            speakText(`Has seleccionado a ${destinatario.name} como destinatario.`);
-        });
-    });
+		newImage.addEventListener('click', () => {
+			document.getElementById('recipient').value = destinatario.name;
+			document.getElementById('correo').value = destinatario.email; // Asignar el correo
+			speakText(`Has seleccionado a ${destinatario.name} como destinatario.`);
+		});
+	});
 }
 
 
@@ -583,124 +583,124 @@ document.getElementById("send-email-btn").addEventListener("click", function() {
 
 
 function generarPDFBase64() {
-    return new Promise((resolve) => {
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF();
-        pdf.setFont(selectedFont);
+	return new Promise((resolve) => {
+		const { jsPDF } = window.jspdf;
+		const pdf = new jsPDF();
+		pdf.setFont(selectedFont);
 
-        const text = output.value.trim();
-        const recipient = recipientInput.value.trim();
-        const date = new Date().toLocaleDateString();
-        
-        const pageWidth = pdf.internal.pageSize.getWidth();
-        const pageHeight = pdf.internal.pageSize.getHeight();
-        const textMargin = 10;
-        const lineHeight = 10;
-        let yPosition = 50;
+		const text = output.value.trim();
+		const recipient = recipientInput.value.trim();
+		const date = new Date().toLocaleDateString();
 
-        if (selectedPreviewBackground) {
-            // Si hay una imagen de fondo seleccionada
-            const img = new Image();
-            img.src = selectedPreviewBackground;
+		const pageWidth = pdf.internal.pageSize.getWidth();
+		const pageHeight = pdf.internal.pageSize.getHeight();
+		const textMargin = 10;
+		const lineHeight = 10;
+		let yPosition = 50;
 
-            img.onload = function () {
-                pdf.addImage(img, 'JPEG', 0, 0, pageWidth, pageHeight);
-                pdf.setTextColor(0, 0, 0);
-                pdf.text(`Para: ${recipient}`, textMargin, yPosition);
-                yPosition += lineHeight;
-                pdf.text(`Fecha: ${date}`, textMargin, yPosition);
-                yPosition += lineHeight;
+		if (selectedPreviewBackground) {
+			// Si hay una imagen de fondo seleccionada
+			const img = new Image();
+			img.src = selectedPreviewBackground;
 
-                const textLines = pdf.splitTextToSize(text, pageWidth - (textMargin * 2));
-                pdf.text(textLines, textMargin, yPosition);
+			img.onload = function () {
+				pdf.addImage(img, 'JPEG', 0, 0, pageWidth, pageHeight);
+				pdf.setTextColor(0, 0, 0);
+				pdf.text(`Para: ${recipient}`, textMargin, yPosition);
+				yPosition += lineHeight;
+				pdf.text(`Fecha: ${date}`, textMargin, yPosition);
+				yPosition += lineHeight;
 
-                // Convertir a Base64
-                const pdfBlob = pdf.output("blob");
-                const reader = new FileReader();
-                reader.readAsDataURL(pdfBlob);
-                reader.onloadend = function () {
-                    const base64PDF = reader.result.split(",")[1]; // Obtener solo la parte Base64
-                    resolve(base64PDF);
-                };
-            };
+				const textLines = pdf.splitTextToSize(text, pageWidth - (textMargin * 2));
+				pdf.text(textLines, textMargin, yPosition);
 
-            img.onerror = function () {
-                console.error("Error al cargar la imagen de fondo.");
-                resolve(null);
-            };
-        } else if (selectedColor) {
-            // Si hay un color de fondo seleccionado
-            pdf.setFillColor(selectedColor);
-            pdf.rect(0, 0, pageWidth, pageHeight, "F");
-            pdf.setTextColor(0, 0, 0);
-            pdf.text(`Para: ${recipient}`, textMargin, yPosition);
-            yPosition += lineHeight;
-            pdf.text(`Fecha: ${date}`, textMargin, yPosition);
-            yPosition += lineHeight;
+				// Convertir a Base64
+				const pdfBlob = pdf.output("blob");
+				const reader = new FileReader();
+				reader.readAsDataURL(pdfBlob);
+				reader.onloadend = function () {
+					const base64PDF = reader.result.split(",")[1]; // Obtener solo la parte Base64
+					resolve(base64PDF);
+				};
+			};
 
-            const textLines = pdf.splitTextToSize(text, pageWidth - (textMargin * 2));
-            pdf.text(textLines, textMargin, yPosition);
+			img.onerror = function () {
+				console.error("Error al cargar la imagen de fondo.");
+				resolve(null);
+			};
+		} else if (selectedColor) {
+			// Si hay un color de fondo seleccionado
+			pdf.setFillColor(selectedColor);
+			pdf.rect(0, 0, pageWidth, pageHeight, "F");
+			pdf.setTextColor(0, 0, 0);
+			pdf.text(`Para: ${recipient}`, textMargin, yPosition);
+			yPosition += lineHeight;
+			pdf.text(`Fecha: ${date}`, textMargin, yPosition);
+			yPosition += lineHeight;
 
-            const pdfBlob = pdf.output("blob");
-            const reader = new FileReader();
-            reader.readAsDataURL(pdfBlob);
-            reader.onloadend = function () {
-                const base64PDF = reader.result.split(",")[1];
-                resolve(base64PDF);
-            };
-        } else {
-            // Fondo blanco por defecto
-            pdf.setFillColor(255, 255, 255);
-            pdf.rect(0, 0, pageWidth, pageHeight, "F");
-            pdf.setTextColor(0, 0, 0);
-            pdf.text(`Para: ${recipient}`, textMargin, yPosition);
-            yPosition += lineHeight;
-            pdf.text(`Fecha: ${date}`, textMargin, yPosition);
-            yPosition += lineHeight;
+			const textLines = pdf.splitTextToSize(text, pageWidth - (textMargin * 2));
+			pdf.text(textLines, textMargin, yPosition);
 
-            const textLines = pdf.splitTextToSize(text, pageWidth - (textMargin * 2));
-            pdf.text(textLines, textMargin, yPosition);
+			const pdfBlob = pdf.output("blob");
+			const reader = new FileReader();
+			reader.readAsDataURL(pdfBlob);
+			reader.onloadend = function () {
+				const base64PDF = reader.result.split(",")[1];
+				resolve(base64PDF);
+			};
+		} else {
+			// Fondo blanco por defecto
+			pdf.setFillColor(255, 255, 255);
+			pdf.rect(0, 0, pageWidth, pageHeight, "F");
+			pdf.setTextColor(0, 0, 0);
+			pdf.text(`Para: ${recipient}`, textMargin, yPosition);
+			yPosition += lineHeight;
+			pdf.text(`Fecha: ${date}`, textMargin, yPosition);
+			yPosition += lineHeight;
 
-            const pdfBlob = pdf.output("blob");
-            const reader = new FileReader();
-            reader.readAsDataURL(pdfBlob);
-            reader.onloadend = function () {
-                const base64PDF = reader.result.split(",")[1];
-                resolve(base64PDF);
-            };
-        }
-    });
+			const textLines = pdf.splitTextToSize(text, pageWidth - (textMargin * 2));
+			pdf.text(textLines, textMargin, yPosition);
+
+			const pdfBlob = pdf.output("blob");
+			const reader = new FileReader();
+			reader.readAsDataURL(pdfBlob);
+			reader.onloadend = function () {
+				const base64PDF = reader.result.split(",")[1];
+				resolve(base64PDF);
+			};
+		}
+	});
 }
 
 
 
 async function enviarCorreoConPDF(destinatario, nombreDestinatario) {
-    try {
-        const base64PDF = await generarPDFBase64();
+	try {
+		const base64PDF = await generarPDFBase64();
 
-        if (!base64PDF) {
-            console.error("Error: No se pudo generar el PDF en base64.");
-            speakText("Hubo un problema generando el PDF. Inténtalo de nuevo.");
-            return;
-        }
+		if (!base64PDF) {
+			console.error("Error: No se pudo generar el PDF en base64.");
+			speakText("Hubo un problema generando el PDF. Inténtalo de nuevo.");
+			return;
+		}
 
-        emailjs.send('service_46kw8rf', 'template_5fuve3j', {
-            to_email: destinatario,
-            to_name: nombreDestinatario,
-            message: 'Aquí tienes tu carta mágica en formato PDF.',
-            attachment: `data:application/pdf;base64,${base64PDF}`, // Prefijo correcto
-            filename: 'Carta_Magica.pdf'
-        }).then(response => {
-            console.log('Correo enviado con PDF', response.status, response.text);
-            speakText('Tu carta en PDF ha sido enviada por correo.');
-        }).catch(err => {
-            console.error('Error al enviar el correo', err);
-            speakText('Hubo un error al enviar el correo. Por favor, inténtalo de nuevo.');
-        });
-    } catch (error) {
-        console.error("Error en enviarCorreoConPDF:", error);
-        speakText("Hubo un problema inesperado. Inténtalo de nuevo.");
-    }
+		emailjs.send('service_46kw8rf', 'template_5fuve3j', {
+			to_email: destinatario,
+			to_name: nombreDestinatario,
+			message: 'Aquí tienes tu carta mágica en formato PDF.',
+			attachment: `data:application/pdf;base64,${base64PDF}`, // Prefijo correcto
+			filename: 'Carta_Magica.pdf'
+		}).then(response => {
+			console.log('Correo enviado con PDF', response.status, response.text);
+			speakText('Tu carta en PDF ha sido enviada por correo.');
+		}).catch(err => {
+			console.error('Error al enviar el correo', err);
+			speakText('Hubo un error al enviar el correo. Por favor, inténtalo de nuevo.');
+		});
+	} catch (error) {
+		console.error("Error en enviarCorreoConPDF:", error);
+		speakText("Hubo un problema inesperado. Inténtalo de nuevo.");
+	}
 }
 
 
@@ -732,8 +732,8 @@ document.getElementById("send-email-btn").addEventListener("click", function () 
 	capturarCartaComoPNG().then(imagenDataURL => {
 		enviarCorreoConPDF(recipientEmail, recipientName);
 		enviarCorreoConImagen(recipientEmail, recipientName, imagenDataURL);
-		
-	
+
+
 	});
 });
 
@@ -765,22 +765,69 @@ async function capturarCartaComoPNG() {
 }
 
 
-function enviarCorreoConImagen(destinatario, nombreDestinatario, imagenDataURL) {
-	console.log('destinatario', destinatario);
-	const textarea = document.getElementById("output");
-	const texto = textarea.value;
-	emailjs.send('service_46kw8rf', 'template_5fuve3j', {
-		to_email: destinatario,
-		to_name: nombreDestinatario,
-		message: 'Aquí tienes tu carta mágica ' + texto,
-		attachment: imagenDataURL // Enviar la imagen como base64
-	}).then(response => {
-		console.log('Correo enviado', response.status, response.text);
-		
-		speakText('Tu carta ha sido enviada por correo.');
-	}).catch(err => {
-		console.error('Error al enviar el correo', err);
-		speakText('Hubo un error al enviar el correo. Por favor, inténtalo de nuevo.');
-	});
+async function enviarCorreoConImagen(destinatario, nombreDestinatario, imagenDataURL) {
+    const text = output.value.trim(); // Puedes personalizarlo o recibirlo como parámetro
+    const date = new Date().toLocaleDateString();
+
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF();
+    pdf.setFont("helvetica");
+
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    const textMargin = 10; // Margen para el texto
+    const lineHeight = 10; // Altura de línea
+    let yPosition = 50; // Posición vertical inicial para el texto
+
+    pdf.setFillColor(255, 255, 255); // Fondo blanco por defecto
+    pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+    pdf.setTextColor(0, 0, 0); // Color del texto
+
+    // Añadir destinatario, fecha y texto con saltos de línea automáticos
+    pdf.text(`Para: ${nombreDestinatario}`, textMargin, yPosition);
+    yPosition += lineHeight;
+    pdf.text(`Fecha: ${date}`, textMargin, yPosition);
+    yPosition += lineHeight;
+
+    // Dividir el texto en líneas que se ajusten al ancho de la página
+    const textLines = pdf.splitTextToSize(text, pageWidth - (textMargin * 2));
+    pdf.text(textLines, textMargin, yPosition);
+
+    // Convertir el PDF a un Blob y luego a un archivo
+    const pdfBlob = pdf.output('blob');
+
+    // Generar un nombre de archivo único utilizando la marca de tiempo
+    const timestamp = new Date().getTime(); // Obtiene el tiempo actual en milisegundos
+    const pdfFileName = `carta_${timestamp}.pdf`;
+
+    const pdfFile = new File([pdfBlob], pdfFileName, { type: 'application/pdf' });
+
+    // URL de la API
+    const url = 'https://usebasin.com/f/2d77b7f8d93d';
+
+    // Datos del formulario
+    const formData = new FormData();
+    formData.append('email', destinatario);
+    formData.append('file-upload', pdfFile);
+
+    const options = {
+        method: 'POST',
+        credentials: 'include', // Incluir cookies en la solicitud
+        body: formData
+    };
+
+    // Realizar la solicitud
+    try {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+            throw new Error('Error en la solicitud');
+        }
+        const data = await response.json();
+        console.log('Respuesta:', data);
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
+
 
