@@ -1,7 +1,7 @@
 body {
     font-family: 'Fantasy', 'Arial', sans-serif;
-    background: linear-gradient(#f5e97f,#faea5e, rgb(230, 236, 52));
-    margin: 0;
+    background: url('fondo_animado.gif') center/cover no-repeat, /* Imagen animada como fondo */
+    linear-gradient(#f5e97f, #faea5e, rgb(230, 236, 52)); /* Degradado como respaldo */    margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -24,14 +24,15 @@ body {
 }
 
 .recipient-gallery {
-    display: flex; /* Activa el diseño de Flexbox */
-    flex-direction: column; /* Mantiene la disposición en columna */
+    margin-bottom: 30px; /* Espacio inferior de 30px */
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    width: 100%; /* Ajusta el ancho al contenedor de la galería */
-    height: 300px; /* Establece una altura fija para el contenedor */
-    overflow-y: auto; /* Agrega la barra de desplazamiento vertical */
-    gap: 10px; /* Espacio entre las imágenes */
-    padding-right: 10px; /* Un poco de espacio para la barra de desplazamiento */
+    width: 100%;
+    height: 300px;
+    overflow-y: auto;
+    gap: 10px;
+    padding-right: 10px;
 }
 
 .recipient-gallery img {
@@ -127,7 +128,7 @@ input#recipient:hover {
 textarea {
     height: 310px;
     width: 93%;
-    padding: 15px;
+    padding: 5px;
     font-size: 20px;
     border: 2px solid #d4af37;
     border-radius: 10px;
@@ -158,11 +159,12 @@ textarea:focus {
     margin-bottom: 20px;
 }
 
-.controlsanadir{
+.controlsanadir {
+    margin-top: 40px; /* Espacio superior de 30px */
     gap: 40px;
     margin-bottom: 40px;
-	top: 8px;
-	left: 16px;
+    top: 8px;
+    left: 16px;
 }
 
 .font-box {
@@ -245,8 +247,8 @@ textarea:focus {
 }
 
 .carta, .estilos {
-    padding: 20px;
-    border: 1px solid rgb(218, 214, 130);
+    padding: 0px;
+    border: 5px solid rgb(218, 214, 130);
     background-color: #fbf6b0;
 	
 }
@@ -260,7 +262,7 @@ textarea:focus {
     background-color: #fbf6b0;
 }
 
-
+/*botones*/
 .button-icon {
     width: 40px;
     height: 40px;
@@ -382,21 +384,23 @@ input.error::placeholder {
 .container {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    width: 90%;
-    max-width: 1200px;
+    gap: 20px; /* Espacio entre elementos aumentado */
+    width: 95%; /* Ancho aumentado */
+    max-width: 1400px; /* Ancho máximo aumentado */
     justify-content: center; /* Centra las secciones */
+    padding: 20px; /* Padding añadido para más espacio interno */
+    margin: 0 auto; /* Centra el contenedor en la página */
 }
 
 /* Cada sección */
 .box {
     flex: 1;
     min-width: 250px; /* Tamaño mínimo para que sea responsivo */
-    max-width: 350px; /* Tamaño máximo por sección */
+    max-width: 460px; /* Tamaño máximo por sección */
     background-color: white;
     padding: 20px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -413,4 +417,120 @@ input.error::placeholder {
         flex-direction: column;
         align-items: center;
     }
+}
+
+
+/* Estilo para las etiquetas */
+label {
+    display: block; /* Hace que cada etiqueta esté en una línea nueva */
+    font-size: 18px; /* Tamaño de fuente */
+    font-weight: bold; /* Texto en negrita */
+    color: #333; /* Color del texto */
+    margin-bottom: 10px; /* Espacio inferior */
+    margin-top: 20px; /* Espacio superior */
+}
+
+/* Estilo para los campos de entrada */
+input[type="text"] {
+    width: 80%; /* Ancho completo */
+    max-width: 400px; /* Ancho máximo */
+    padding: 12px 15px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de fuente */
+    border: 2px solid #d4af37; /* Borde dorado */
+    border-radius: 10px; /* Bordes redondeados */
+    background-color: #fdfbe6; /* Fondo claro */
+    color: #333; /* Color del texto */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+    outline: none; /* Elimina el borde por defecto al enfocar */
+}
+
+/* Estilo cuando el campo está enfocado */
+input[type="text"]:focus {
+    border-color: #b8860b; /* Cambia el color del borde al enfocar */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+/* Estilo para campos de solo lectura */
+input[readonly] {
+    background-color: #f0f0f0; /* Fondo gris claro */
+    cursor: not-allowed; /* Cambia el cursor a "no permitido" */
+    color: #666; /* Color del texto más suave */
+}
+
+@keyframes movePlaceholder {
+    0% {
+        transform: translateX(0); /* Empieza en la posición original */
+    }
+    50% {
+        transform: translateX(10px); /* Se mueve 10px a la derecha */
+    }
+    100% {
+        transform: translateX(0); /* Vuelve a la posición original */
+    }
+}
+
+input[type="text"]:focus::placeholder {
+    animation: none; /* Detiene la animación al enfocar el campo */
+    opacity: 0.5; /* Reduce la opacidad del placeholder */
+}
+
+input[type="text"]::placeholder {
+    color: #999; /* Color del placeholder */
+    animation: movePlaceholder 2s infinite; /* Aplica la animación */
+}
+
+
+.theme-options, .export-controls {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.theme-options h4, .export-controls h4 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #333;
+    text-align: center;
+}
+
+.theme-controls, .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.icon-button:hover {
+    transform: scale(1.1);
+}
+
+.action-button {
+    background-color: #eac645;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s ease;
+}
+
+.action-button img {
+    width: 24px;
+    height: 24px;
+}
+
+.action-button:hover {
+    background-color: #fbf6b0;
 }

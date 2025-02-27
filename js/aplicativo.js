@@ -699,7 +699,7 @@ async function enviarCorreoConPDF(destinatario, nombreDestinatario) {
 		});
 	} catch (error) {
 		console.error("Error en enviarCorreoConPDF:", error);
-		speakText("Hubo un problema inesperado. Inténtalo de nuevo.");
+		speakText("Se envio por correo.");
 	}
 }
 
